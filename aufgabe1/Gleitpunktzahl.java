@@ -291,17 +291,58 @@ public class Gleitpunktzahl {
         return this.mantisse - r.mantisse;
     }
 
-	/**
-	 * gibt die Anzahl an bits zurueck, die fuer die Darstellung von num benoetigt werden
-	 * wird in der Funktion normalisiere() aufgerufen
-	 * */
+    /**
+     * gibt die Anzahl an bits zurueck, die fuer die Darstellung von num benoetigt werden
+     * wird in der Funktion normalisiere() aufgerufen
+     */
     private int sizeOf(int num) {
         int counter = 0;
         while (num != 0) {
-			num >>= 1;
-			counter++;
+            num /= 2; //recht shiften, aber >> würde hier nicht funktionieren, da >> ist ein logical shift, und mit negativen zahlen wird das sign bit immer an der höchstwertigsten bit bleiben, was zu einer unendlichen Schleife führt
+            counter++;
         }
         return counter;
+    }
+
+    /**
+     * Die Funktion prüft, ob es sich um die Mantisse oder um den Exponenten handelt,
+     * und verkleinert die Größe entsprechend der benötigten Mantisse/Exponent Größe
+     * Am Ende wird den Exponent ebenfalls entsprechend angepasst
+     * */
+    private void sizeDown(boolean mantisse, int current) {
+        /*Hier wird gespeichert, ob aufrunden benötigt wird, oder nicht.*/
+        boolean roundUp;
+        if (mantisse) {
+            int dif = current - getSizeMantisse() - 1;
+            /*passt die Groesse der Mantisse, sodass sie 1 bit mehr hat als die benoetigte Groesse*/
+            this.mantisse >>= (dif);
+            /*prueft ob das letzte bit in der Mantisse gleich 1 ist*/
+            roundUp = (this.mantisse % 2 != 0);
+            this.mantisse >>= 1; //jetzt hat die Mantisse die richtige Groesse
+            if (roundUp) this.mantisse += 1; //aufrunden wenn nötig
+            this.exponent += dif; //exponent anpassen
+        }
+        else {
+            /*Dasselbe für den Exponenten*/
+            this.exponent >>= (current - getSizeExponent() - 1);
+            roundUp = (this.exponent % 2 != 0);
+            this.exponent >>= 1;
+            if (roundUp) this.exponent += 1;
+        }
+    }
+
+    /**
+     * Die Funktion prüft, ob es sich um die Mantisse oder um den Exponenten handelt,
+     * und vergrößert die Größe entsprechend der benötigten Mantisse/Exponent Größe
+     * */
+    private void sizeUp(boolean mantisse, int current) {
+        if (mantisse) {
+            int dif = getSizeMantisse() - current;
+            this.mantisse <<= (dif); //jetzt hat die Mantisse die richtige Groesse
+            this.exponent -= dif;
+        }
+            /*Dasselbe für den Exponenten*/
+        else this.exponent >>= (getSizeExponent() - current);
     }
 
     /**
@@ -323,10 +364,13 @@ public class Gleitpunktzahl {
          * ist.
          * Achten Sie auf Sonderfaelle!
          */
-        int curManSize = sizeOf(this.exponent);
+        int curManSize = sizeOf(this.mantisse);
+        if (curManSize > getSizeMantisse()) sizeDown(true, curManSize);
+        else if (curManSize < getSizeMantisse()) sizeUp(true, curManSize);
+
         int curExpSize = sizeOf(this.exponent);
-        this.mantisse >>= (sizeOf(this.mantisse) - getSizeMantisse());
-        this.exponent >>= (sizeOf(this.exponent) - getSizeExponent());
+        if (curExpSize > getSizeExponent()) sizeDown(false, curExpSize);
+        else if (curExpSize < getSizeExponent()) sizeUp(false, curExpSize);
     }
 
     /**
@@ -338,6 +382,22 @@ public class Gleitpunktzahl {
         /*
          * TODO: hier ist die Operation denormalisiere zu implementieren.
          */
+        if (a.exponent != b.exponent) {
+            Gleitpunktzahl greater;
+            Gleitpunktzahl smaller;
+            if (a.exponent > b.exponent) {
+                greater = a;
+                smaller = b;
+            }
+            else {
+                greater = b;
+                smaller = a;
+            }
+            int dif = greater.exponent - smaller.exponent;
+            //greater.exponent = smaller.exponent;
+            greater.mantisse <<= dif;
+        }
+
     }
 
     /**
@@ -352,8 +412,13 @@ public class Gleitpunktzahl {
          * Funktionen normalisiere und denormalisiere.
          * Achten Sie auf Sonderfaelle!
          */
-
-        return new Gleitpunktzahl();
+        Gleitpunktzahl ret = new Gleitpunktzahl(this);
+        denormalisiere(ret, r);
+        ret.mantisse += r.mantisse;
+        if (ret.exponent < r.exponent) ret.exponent = r.exponent;
+        ret.normalisiere();
+        r.normalisiere();
+        return ret;
     }
 
     /**
