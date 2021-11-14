@@ -44,9 +44,10 @@ public class FastMath {
 	 * @return Approximation for 1 / sqrt(x).
 	 */
 	public static Gleitpunktzahl invSqrt(Gleitpunktzahl x) {
-
-		/* TODO: hier den "fast inverse square root" Algorithmus implementieren */
-		return new Gleitpunktzahl();
+		int bitFolge = gleitpunktzahlToIEEE(x);
+		bitFolge /= 2;
+		bitFolge = MAGIC_NUMBER - bitFolge;
+		return iEEEToGleitpunktzahl(bitFolge);
 	}
 
 	/**
