@@ -24,7 +24,7 @@ public class Test_Gleitpunktzahl {
 		 * Vorzeichen
 		 */
 		Gleitpunktzahl.setSizeMantisse(4);
-		Gleitpunktzahl.setSizeExponent(2);
+		Gleitpunktzahl.setSizeExponent(4);
 
 		Gleitpunktzahl x;
 		Gleitpunktzahl y;
@@ -81,11 +81,131 @@ public class Test_Gleitpunktzahl {
 				System.out.println("    Richtiges Ergebnis\n");
 			}
 
-			/*************
-			 * Eigene Tests einfuegen
-			 */
+			// Test: 0.25 + 1.75
+			double a = 0.25, b = 1.75;
+			System.out.println("Test: Addition  "+ a + " + "+ b);
+			x = new Gleitpunktzahl(a);
+			y = new Gleitpunktzahl(b);
 
-			System.out.println("\n\nEIGENE TESTS EINFÜGEN!!!!!!!\n\n");
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(a + b);
+
+			// Berechnung
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//
+			a = 0.25; b = -1.75;
+			System.out.println("Test: Addition  "+ a + " + "+ b);
+			x = new Gleitpunktzahl(a);
+			y = new Gleitpunktzahl(b);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(a + b);
+
+			// Berechnung
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//
+			a = 2.25; b = -1.75;
+			System.out.println("Test: Addition  "+ a + " + "+ b);
+			x = new Gleitpunktzahl(a);
+			y = new Gleitpunktzahl(b);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(a + b);
+
+			// Berechnung
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//
+			a = -0.25; b = 1.75;
+			System.out.println("Test: Addition  "+ a + " + "+ b);
+			x = new Gleitpunktzahl(a);
+			y = new Gleitpunktzahl(b);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(a + b);
+
+			// Berechnung
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//
+			a = -0.25; b = -1.75;
+			System.out.println("Test: Addition  "+ a + " + "+ b);
+			x = new Gleitpunktzahl(a);
+			y = new Gleitpunktzahl(b);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(a + b);
+
+			// Berechnung
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//
+			a = -3.25; b = -1.75;
+			System.out.println("Test: Addition  "+ a + " + "+ b);
+			x = new Gleitpunktzahl(a);
+			y = new Gleitpunktzahl(b);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(a + b);
+
+			// Berechnung
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
 
 		} catch (Exception e) {
 			System.out.print("Exception bei der Auswertung des Ergebnis!!\n");
@@ -95,7 +215,7 @@ public class Test_Gleitpunktzahl {
 		try {
 			System.out.println("Test der Subtraktion mit Gleitpunktzahl");
 
-			// Test: Addition
+			// Test: Subtraktion
 			System.out.println("Test: Subtraktion  x - y");
 			x = new Gleitpunktzahl(3.25);
 			y = new Gleitpunktzahl(2.75);
@@ -119,7 +239,210 @@ public class Test_Gleitpunktzahl {
 			 * Eigene Tests einfuegen
 			 */
 
-			System.out.println("\n\nEIGENE TESTS EINFÜGEN!!!!!!!\n\n");
+			//2.25 - 1.0
+			System.out.println("Test Sub: 2.25 - 1.0");
+			x = new Gleitpunktzahl(2.25);
+			y = new Gleitpunktzahl(1);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((2.25-1.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//0.5 - 0.25
+			System.out.println("Test Sub: 0.5 - 0.25");
+			x = new Gleitpunktzahl(0.5);
+			y = new Gleitpunktzahl(0.25);
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((0.5-0.25));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//1.0 - 0.125
+			System.out.println("Test Sub: 1.0 - 0.125");
+			x = new Gleitpunktzahl(1.0);
+			y = new Gleitpunktzahl(0.125);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((1.0-0.125));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//0.25 - 1.75
+			System.out.println("Test Sub: 0.25 - 1.75");
+			x = new Gleitpunktzahl(0.25);
+			y = new Gleitpunktzahl(1.75);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((0.25-1.75));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//1.25 - 2.25
+			System.out.println("Test Sub: 1.25 - 2.25");
+			x = new Gleitpunktzahl(1.25);
+			y = new Gleitpunktzahl(2.25);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((1.25-2.25));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//0.25 - 3.0
+			System.out.println("Test Sub: 0.25 - 3.0");
+			x = new Gleitpunktzahl(0.25);
+			y = new Gleitpunktzahl(3.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((0.25-3.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//0.25 - -3.0
+			System.out.println("Test Sub: 0.25 - -3.0");
+			x = new Gleitpunktzahl(0.25);
+			y = new Gleitpunktzahl(-3.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((0.25-(-3.0)));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//-0.25 - -3.0
+			System.out.println("Test Sub: -0.25 - -3.0");
+			x = new Gleitpunktzahl(-0.25);
+			y = new Gleitpunktzahl(-3.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((-0.25-(-3.0)));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//-3.25 - 3.0
+			System.out.println("Test Sub: -3.25 - 3.0");
+			x = new Gleitpunktzahl(-3.25);
+			y = new Gleitpunktzahl(3.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((-3.25-3.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//-3.25 - 4.0
+			System.out.println("Test Sub: -3.25 - 4.0");
+			x = new Gleitpunktzahl(-3.25);
+			y = new Gleitpunktzahl(4.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((-3.25-4.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
 
 		} catch (Exception e) {
 			System.out.print("Exception bei der Auswertung des Ergebnis!!\n");
@@ -130,8 +453,11 @@ public class Test_Gleitpunktzahl {
 
 		try {
 			// Test: Sonderfaelle
+
+			//1.Fall
 			// 0 - inf
-			System.out.println("Test: Sonderfaelle");
+			System.out.println("Test: Sonderfaelle\n");
+			System.out.println("Test: 0-inf");
 			x = new Gleitpunktzahl(0.0);
 			y = new Gleitpunktzahl(1.0 / 0.0);
 
@@ -149,14 +475,324 @@ public class Test_Gleitpunktzahl {
 			} else {
 				System.out.println("    Richtiges Ergebnis\n");
 			}
-			
-			/*************
-			 * Eigene Tests einfuegen
-			 */
-
-			System.out.println("\n\nEIGENE TESTS EINFÜGEN!!!!!!!\n\n");
 
 
+			//2.Fall
+			//inf - 0
+			System.out.println("Test: inf-0");
+			x = new Gleitpunktzahl(1.0/0.0);
+			y = new Gleitpunktzahl(0.0);
+
+			// Referenzwerte setzen
+			gleitref.setInfinite(false);
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//3.Fall
+			//inf - inf
+			System.out.println("Test: inf-inf");
+			x = new Gleitpunktzahl(1.0/0.0);
+			y = new Gleitpunktzahl(1.0/0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((1.0/0.0 - 1.0/0.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//4.Fall
+			//0 - 0
+			System.out.println("Test: 0-0");
+			x = new Gleitpunktzahl(0.0);
+			y = new Gleitpunktzahl(0.0);
+
+			// Referenzwerte setzen
+			gleitref.setNull();
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//5.Fall
+			//0 - 5.25
+			System.out.println("Test: 0 - 5.25");
+			x = new Gleitpunktzahl(0.0);
+			y = new Gleitpunktzahl(5.25);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((0.0-5.25));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//6.Fall
+			//5.25 - 0
+			System.out.println("Test: 5.25 - 0");
+			x = new Gleitpunktzahl(5.25);
+			y = new Gleitpunktzahl(0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((5.25 - 0.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//-inf - inf
+			System.out.println("Test: -inf - inf");
+			x = new Gleitpunktzahl(-1.0/0.0);
+			y = new Gleitpunktzahl(1.0/0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(((-1.0/0.0) - 1.0/0.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//-inf - -inf
+			System.out.println("Test: -inf - -inf");
+			x = new Gleitpunktzahl(-1.0/0.0);
+			y = new Gleitpunktzahl(-1.0/0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(((-1.0/0.0)-(-1.0/0.0)));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.sub(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+
+			//1.Fall
+			// 0 - inf
+			System.out.println("Test: Sonderfaelle\n");
+			System.out.println("Test: 0+inf");
+			x = new Gleitpunktzahl(0.0);
+			y = new Gleitpunktzahl(1.0 / 0.0);
+
+			// Referenzwerte setzen
+			gleitref.setInfinite(false);
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//2.Fall
+			//inf - 0
+			System.out.println("Test: inf+0");
+			x = new Gleitpunktzahl(1.0/0.0);
+			y = new Gleitpunktzahl(0.0);
+
+			// Referenzwerte setzen
+			gleitref.setInfinite(false);
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printAdd(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//3.Fall
+			//inf - inf
+			System.out.println("Test: inf+inf");
+			x = new Gleitpunktzahl(1.0/0.0);
+			y = new Gleitpunktzahl(1.0/0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((1.0/0.0 + 1.0/0.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//4.Fall
+			//0 - 0
+			System.out.println("Test: 0+0");
+			x = new Gleitpunktzahl(0.0);
+			y = new Gleitpunktzahl(0.0);
+
+			// Referenzwerte setzen
+			gleitref.setNull();
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+
+			//5.Fall
+			//0 - 5.25
+			System.out.println("Test: 0 + 5.25");
+			x = new Gleitpunktzahl(0.0);
+			y = new Gleitpunktzahl(5.25);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((0.0+5.25));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//6.Fall
+			//5.25 + 0
+			System.out.println("Test: 5.25 + 0");
+			x = new Gleitpunktzahl(5.25);
+			y = new Gleitpunktzahl(0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl((5.25 + 0.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//-inf - inf
+			System.out.println("Test: -inf + inf");
+			x = new Gleitpunktzahl(-1.0/0.0);
+			y = new Gleitpunktzahl(1.0/0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(((-1.0/0.0) + 1.0/0.0));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
+
+			//-inf - -inf
+			System.out.println("Test: -inf + -inf");
+			x = new Gleitpunktzahl(-1.0/0.0);
+			y = new Gleitpunktzahl(-1.0/0.0);
+
+			// Referenzwerte setzen
+			gleitref = new Gleitpunktzahl(((-1.0/0.0)+(-1.0/0.0)));
+
+			// Berechnung mit der Methode des Studenten durchfuehren
+			gleiterg = x.add(y);
+
+			// Test, ob Ergebnis korrekt
+			if (gleiterg.compareAbsTo(gleitref) != 0
+					|| gleiterg.vorzeichen != gleitref.vorzeichen) {
+				printSub(x.toString(), y.toString());
+				printErg(gleiterg.toString(), gleitref.toString());
+			} else {
+				System.out.println("    Richtiges Ergebnis\n");
+			}
 		} catch (Exception e) {
 			System.out
 					.print("Exception bei der Auswertung des Ergebnis in der Klasse Gleitpunktzahl!!\n");

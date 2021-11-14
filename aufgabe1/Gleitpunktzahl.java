@@ -292,37 +292,23 @@ public class Gleitpunktzahl {
     }
 
     /**
-     * gibt die Anzahl an bits zurueck, die fuer die Darstellung von num benoetigt werden
-     * wird in der Funktion normalisiere() aufgerufen
-     */
-    private int sizeOf(int num) {
-        int counter = 0;
-        while (num != 0) {
-            num /= 2; //recht shiften, aber >> würde hier nicht funktionieren, da >> ist ein logical shift, und mit negativen zahlen wird das sign bit immer an der höchstwertigsten bit bleiben, was zu einer unendlichen Schleife führt
-            counter++;
-        }
-        return counter;
-    }
-
-    /**
      * Die Funktion prüft, ob es sich um die Mantisse oder um den Exponenten handelt,
      * und verkleinert die Größe entsprechend der benötigten Mantisse/Exponent Größe
      * Am Ende wird den Exponent ebenfalls entsprechend angepasst
-     * */
+     */
     private void sizeDown(boolean mantisse, int current) {
         /*Hier wird gespeichert, ob aufrunden benötigt wird, oder nicht.*/
         boolean roundUp;
         if (mantisse) {
-            int dif = current - getSizeMantisse() - 1;
+            int dif = current - getSizeMantisse();
             /*passt die Groesse der Mantisse, sodass sie 1 bit mehr hat als die benoetigte Groesse*/
-            this.mantisse >>= (dif);
+            this.mantisse >>= (dif - 1);
             /*prueft ob das letzte bit in der Mantisse gleich 1 ist*/
             roundUp = (this.mantisse % 2 != 0);
             this.mantisse >>= 1; //jetzt hat die Mantisse die richtige Groesse
             if (roundUp) this.mantisse += 1; //aufrunden wenn nötig
             this.exponent += dif; //exponent anpassen
-        }
-        else {
+        } else {
             /*Dasselbe für den Exponenten*/
             this.exponent >>= (current - getSizeExponent() - 1);
             roundUp = (this.exponent % 2 != 0);
@@ -332,17 +318,12 @@ public class Gleitpunktzahl {
     }
 
     /**
-     * Die Funktion prüft, ob es sich um die Mantisse oder um den Exponenten handelt,
-     * und vergrößert die Größe entsprechend der benötigten Mantisse/Exponent Größe
-     * */
-    private void sizeUp(boolean mantisse, int current) {
-        if (mantisse) {
-            int dif = getSizeMantisse() - current;
-            this.mantisse <<= (dif); //jetzt hat die Mantisse die richtige Groesse
-            this.exponent -= dif;
-        }
-            /*Dasselbe für den Exponenten*/
-        else this.exponent >>= (getSizeExponent() - current);
+     * vergrößert die Größe entsprechend der benötigten Größe der Mantisse
+     */
+    private void sizeUp(int current) {
+        int dif = getSizeMantisse() - current;
+        this.mantisse <<= (dif); //jetzt hat die Mantisse die richtige Groesse
+        this.exponent -= dif;
     }
 
     /**
@@ -364,13 +345,20 @@ public class Gleitpunktzahl {
          * ist.
          * Achten Sie auf Sonderfaelle!
          */
-        int curManSize = sizeOf(this.mantisse);
-        if (curManSize > getSizeMantisse()) sizeDown(true, curManSize);
-        else if (curManSize < getSizeMantisse()) sizeUp(true, curManSize);
+        /*hier werden die Sonderfälle betrachtet*/
+        if (!isInfinite() && !isNull() && !isNaN()) {
+            if (exponent > maxExponent) setInfinite(this.vorzeichen);
+            else if (Integer.numberOfLeadingZeros(mantisse) == 32) setNull();
+                /* Im normalen Fall*/
+            else {
+                int curManSize = 32 - Integer.numberOfLeadingZeros(this.mantisse);
+                if (curManSize > getSizeMantisse()) sizeDown(true, curManSize);
+                else if (curManSize < getSizeMantisse()) sizeUp(curManSize);
 
-        int curExpSize = sizeOf(this.exponent);
-        if (curExpSize > getSizeExponent()) sizeDown(false, curExpSize);
-        else if (curExpSize < getSizeExponent()) sizeUp(false, curExpSize);
+                int curExpSize = 32 - Integer.numberOfLeadingZeros(this.exponent);
+                if (curExpSize > getSizeExponent()) sizeDown(false, curExpSize);
+            }
+        }
     }
 
     /**
@@ -382,23 +370,24 @@ public class Gleitpunktzahl {
         /*
          * TODO: hier ist die Operation denormalisiere zu implementieren.
          */
-        if (a.exponent != b.exponent) {
-            Gleitpunktzahl greater;
-            Gleitpunktzahl smaller;
-            if (a.exponent > b.exponent) {
-                greater = a;
-                smaller = b;
-            }
-            else {
-                greater = b;
-                smaller = a;
-            }
-            int dif = greater.exponent - smaller.exponent;
-            //greater.exponent = smaller.exponent;
-            greater.mantisse <<= dif;
+        int tmp = a.compareAbsTo(b);
+        if (tmp == 0) return;
+        Gleitpunktzahl greater, smaller;
+        /* if |a| > |b| */
+        if (tmp >= 1) {
+            greater = a;
+            smaller = b;
         }
-
+        /* if |a| < |b| */
+        else {
+            greater = b;
+            smaller = a;
+        }
+        int dif = greater.exponent - smaller.exponent;
+        greater.exponent -= dif;
+        greater.mantisse <<= dif;
     }
+
 
     /**
      * addiert das aktuelle Objekt und die Gleitpunktzahl r. Dabei wird zuerst
@@ -413,12 +402,39 @@ public class Gleitpunktzahl {
          * Achten Sie auf Sonderfaelle!
          */
         Gleitpunktzahl ret = new Gleitpunktzahl(this);
-        denormalisiere(ret, r);
-        ret.mantisse += r.mantisse;
-        if (ret.exponent < r.exponent) ret.exponent = r.exponent;
-        ret.normalisiere();
-        r.normalisiere();
+        /* Sonderfälle */
+        if (isInfinite() && r.isInfinite()) {
+            if ((vorzeichen && !r.vorzeichen) || (!vorzeichen && r.vorzeichen)) {//NaN
+                ret.setNaN();
+            }
+        } else if (isInfinite()); // x= (+/-)inf, y=/= inf, x + y = x, x = this = ret
+        else if (r.isInfinite()) ret.setInfinite(r.vorzeichen);
+        else {
+            if (!vorzeichen && !r.vorzeichen) { //nomrale Addition
+                denormalisiere(ret, r);
+                ret.mantisse += r.mantisse;
+                ret.normalisiere();
+                r.normalisiere();
+            } else { //sub verwenden wenn zumindest eins von den beiden Zahlen negatives Vorzeichen besitzt
+                /*kein switch nötig*/
+                if (r.vorzeichen) {
+                    ret = new Gleitpunktzahl(r); //eine Kopie, damit die ursprünglichen Werte eingehalten werden (Vorzeichen)
+                    ret.vorzeichen = !ret.vorzeichen;
+                    return sub(ret);
+                } else {
+                    ret.vorzeichen = !ret.vorzeichen;
+                    return r.sub(ret);
+                }
+            }
+        }
         return ret;
+    }
+
+    /**
+     * Hilfsfunktion
+     */
+    private int sub_(Gleitpunktzahl a, Gleitpunktzahl b) {
+        return a.mantisse - b.mantisse;
     }
 
     /**
@@ -433,9 +449,45 @@ public class Gleitpunktzahl {
          * Funktionen normalisiere und denormalisiere.
          * Achten Sie auf Sonderfaelle!
          */
-
-        return new Gleitpunktzahl();
+        Gleitpunktzahl ret = new Gleitpunktzahl(this);
+        /* Sonderfälle */
+        if (isInfinite() && r.isInfinite()) {
+            if ((vorzeichen && r.vorzeichen) || (!vorzeichen && !r.vorzeichen)) ret.setNaN(); //NaN Fall
+            else ret.setInfinite(vorzeichen);
+        } else if (isInfinite()) ; // x= (+/-)inf, y=/= inf, x - y = x, x = this = ret
+        else if (r.isInfinite()) ret.setInfinite(!r.vorzeichen);
+        else {
+            if (vorzeichen != r.vorzeichen) { // Additions Fall
+                if (vorzeichen) { // -x-y
+                    ret.vorzeichen = false;
+                    ret = ret.add(r);
+                    ret.vorzeichen = true;
+                } else { // x-(-y)
+                    ret = new Gleitpunktzahl(r);
+                    ret.vorzeichen = false;
+                    return this.add(ret);
+                }
+            } else { // normale Subtraktion
+                denormalisiere(ret, r);
+                int tmp = this.compareAbsTo(r);
+                /* Für den Fall |ret| >= |r| ist kein flippen nötig.
+                   Für den Fall (-x)-(-y), x>y lautet das Ergebnis -(x-y)
+                   Für den anderen Fall (x-y) rechnen wir einfach x-y
+                   In beiden Fällen bekommt ret das ursprünglichen Vorzeichen von ret (=this)
+                   wegen ret = new Gleitpunktzahl(this); am Anfang dieser Funktion
+                   */
+                if (tmp >= 0) ret.mantisse = sub_(ret, r);
+                else {//sonst flippen
+                    ret.mantisse = sub_(r, ret);
+                    ret.vorzeichen = !ret.vorzeichen;
+                }
+            }
+        }
+        ret.normalisiere();
+        r.normalisiere();
+        return ret;
     }
+
 
     /**
      * Setzt die Zahl auf den Sonderfall 0
