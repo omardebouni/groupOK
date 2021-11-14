@@ -338,13 +338,6 @@ public class Gleitpunktzahl {
      * Beispiel: Bei 3 Mantissenbits wird die Zahl 10.11 * 2^-1 zu 1.10 * 2^0
      */
     public void normalisiere() {
-        /*
-         * TODO: hier ist die Operation normalisiere zu implementieren.
-         * Beachten Sie, dass die Groesse (Anzahl der Bits) des Exponenten
-         * und der Mantisse durch sizeExponent bzw. sizeMantisse festgelegt
-         * ist.
-         * Achten Sie auf Sonderfaelle!
-         */
         /*hier werden die Sonderfälle betrachtet*/
         if (!isInfinite() && !isNull() && !isNaN()) {
             if (exponent > maxExponent) setInfinite(this.vorzeichen);
@@ -367,9 +360,7 @@ public class Gleitpunktzahl {
      * erweitert. Denormalisieren wird fuer add und sub benoetigt.
      */
     public static void denormalisiere(Gleitpunktzahl a, Gleitpunktzahl b) {
-        /*
-         * TODO: hier ist die Operation denormalisiere zu implementieren.
-         */
+        if (a == null || b == null) throw new NullPointerException("Parametern von denormalisiere dürfen nicht Null sein!");
         int tmp = a.compareAbsTo(b);
         if (tmp == 0) return;
         Gleitpunktzahl greater, smaller;
@@ -396,11 +387,7 @@ public class Gleitpunktzahl {
      * gespeichert, normiert, und dieses wird zurueckgegeben.
      */
     public Gleitpunktzahl add(Gleitpunktzahl r) {
-        /*
-         * TODO: hier ist die Operation add zu implementieren. Verwenden Sie die
-         * Funktionen normalisiere und denormalisiere.
-         * Achten Sie auf Sonderfaelle!
-         */
+        if(r == null) throw new NullPointerException("Addition mit Null-pointer");
         Gleitpunktzahl ret = new Gleitpunktzahl(this);
         /* Sonderfälle */
         if (isInfinite() && r.isInfinite()) {
@@ -444,11 +431,7 @@ public class Gleitpunktzahl {
      * gespeichert, normiert, und dieses wird zurueckgegeben.
      */
     public Gleitpunktzahl sub(Gleitpunktzahl r) {
-        /*
-         * TODO: hier ist die Operation sub zu implementieren. Verwenden Sie die
-         * Funktionen normalisiere und denormalisiere.
-         * Achten Sie auf Sonderfaelle!
-         */
+        if(r == null) throw new NullPointerException("Subtraktion mit Null-pointer");
         Gleitpunktzahl ret = new Gleitpunktzahl(this);
         /* Sonderfälle */
         if (isInfinite() && r.isInfinite()) {
