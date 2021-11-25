@@ -15,7 +15,24 @@ public class IFFT {
      * Zweierpotenz ist. Es gilt also: c.length == 2^m fuer ein beliebiges m.
      */
     public static Complex[] ifft(Complex[] c) {
-        // TODO: diese Methode ist zu implementieren
-        return null;
+        int length = c.length;
+        if (length == 1) return c;
+        Complex v[] = new Complex[length];
+        int m = length/2;
+        Complex z1[] = new Complex[m];
+        Complex z2[] = new Complex[m];
+        for (int i = 0; i < m; i++) {
+            z1[i] = c[i*2];
+            z2[i] = c[i*2+1];
+        }
+        z1 = ifft(z1);
+        z2 = ifft(z2);
+        Complex omega = new Complex(Math.cos(2.0*Math.PI/(double)length), Math.sin(2.0*Math.PI/(double)length));
+        for (int i = 0; i < m; i++) {
+            Complex w = omega.power(i);
+            v[i] = z1[i].add(z2[i].mul(w));
+            v[i+m] = z1[i].sub(z2[i].mul(w));
+        }
+        return v;
     }
 }

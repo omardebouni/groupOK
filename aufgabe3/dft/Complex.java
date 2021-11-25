@@ -6,9 +6,13 @@ package dft;
  * @author Sebastian Rettenberger
  */
 public class Complex {
-    /** Realteil der Zahl */
+    /**
+     * Realteil der Zahl
+     */
     private double real;
-    /** Imaginaerteil der Zahl */
+    /**
+     * Imaginaerteil der Zahl
+     */
     private double imaginary;
 
     public Complex() {
@@ -31,7 +35,8 @@ public class Complex {
      */
     public Complex add(Complex other) {
         // TODO: diese Methode ist zu implementieren
-        return null;
+        Complex ret = new Complex(this.real + other.getReal(), this.imaginary + other.getImaginaer());
+        return ret;
     }
 
     /**
@@ -41,7 +46,8 @@ public class Complex {
      */
     public Complex sub(Complex other) {
         // TODO: diese Methode ist zu implementieren
-        return null;
+        Complex ret = new Complex(this.real - other.getReal(), this.imaginary - other.getImaginaer());
+        return ret;
     }
 
     /**
@@ -50,8 +56,9 @@ public class Complex {
      * @return "this * other"
      */
     public Complex mul(Complex other) {
-        // TODO: diese Methode ist zu implementieren
-        return null;
+        /* (a + bi) * (c + di) = (ac - bd) + (ad+bc)i */
+        Complex ret = new Complex(this.real*other.getReal() - this.imaginary*other.getImaginaer(), this.real* other.getImaginaer()+this.imaginary*other.getReal());
+        return ret;
     }
 
     /**
@@ -124,6 +131,7 @@ public class Complex {
      */
     public static Complex fromPolar(double r, double phi) {
         // TODO: diese Methode ist zu implementieren
-        return null;
+        Complex ret = new Complex(r*Math.cos(phi), r*Math.sin(phi));
+        return ret;
     }
 }

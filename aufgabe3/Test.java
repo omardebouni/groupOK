@@ -9,8 +9,8 @@ public class Test {
      * @param args
      */
     public static void main(String[] args) {
-        testNewton();
-        testSplines();
+        //testNewton();
+        //testSplines();
         testFFT();
     }
 
