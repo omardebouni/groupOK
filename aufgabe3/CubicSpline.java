@@ -93,7 +93,23 @@ public class CubicSpline implements InterpolationMethod {
      */
     @Override
     public double evaluate(double z) {
-        /* TODO: diese Methode ist zu implementieren */
-        return 0.0;
+        if(z < a){
+            return y[0];
+        }
+        if(z > b){
+            return y[n];
+        }
+
+        double temp = a;
+        int counter = 0;
+        while(b > temp + h){
+            temp += h;
+            counter++;
+        }
+
+        double t = (z - temp) / h;
+
+        return y[counter] * (1 - 3*t*t + 2*t*t*t) + y[counter+1]*(3*t*t - 2*t*t*t) +
+                h*yprime[counter]*(t - 2*t*t + t*t*t) + h*yprime[counter+1]*(-t*t + t*t*t);
     }
 }
