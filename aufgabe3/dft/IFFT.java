@@ -27,7 +27,7 @@ public class IFFT {
         }
         z1 = ifft(z1);
         z2 = ifft(z2);
-        Complex omega = new Complex(Math.cos(2.0*Math.PI/(double)length), Math.sin(2.0*Math.PI/(double)length));
+        Complex omega = Complex.fromPolar(1, 2 * Math.PI / length);
         for (int i = 0; i < m; i++) {
             Complex w = omega.power(i);
             v[i] = z1[i].add(z2[i].mul(w));

@@ -82,7 +82,34 @@ public class CubicSpline implements InterpolationMethod {
      * berechnet werden muessen.
      */
     public void computeDerivatives() {
-        /* TODO: diese Methode ist zu implementieren */
+        double one [] = new double[n-2];
+        double four [] = new double[n-1];
+
+        for(int i = 0; i < n - 2; i++){
+            one[i] = 1;
+            four[i] = 4;
+        }
+        four[n - 2] = 4;
+
+        TridiagonalMatrix tm = new TridiagonalMatrix(one, four, one);
+
+        double ys [] = new double[n-1];
+        for(int i = 0; i < ys.length; i++){
+            ys[i] = y[i+2] - y[i];
+            if(i == 0){
+                ys[i] -= (h/3) * yprime[0];
+            }
+            else if(i == ys.length - 1){
+                ys[i] -= (h/3) * yprime[n];
+            }
+
+            ys[i] *= (3/h);
+        }
+
+        double result [] = tm.solveLinearSystem(ys);
+        for(int i = 0; i < result.length; i++){
+            yprime[i+1] = result[i];
+        }
     }
 
     /**

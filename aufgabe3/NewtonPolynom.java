@@ -87,6 +87,7 @@ public class NewtonPolynom implements InterpolationMethod {
      */
     private void computeCoefficients(double[] y) {
         /* TODO: diese Methode ist zu implementieren */
+
     }
 
     /**

@@ -9,8 +9,8 @@ public class Test {
      * @param args
      */
     public static void main(String[] args) {
-        //testNewton();
-        //testSplines();
+        testNewton();
+        testSplines();
         testFFT();
     }
 
@@ -41,6 +41,10 @@ public class Test {
             v[i] = i + 1;
         Complex[] c = dft.DFT.dft(v);
         Complex[] v2 = dft.IFFT.ifft(c);
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println(c[i]);
+        }
 
         for (int i = 0; i < 4; i++) {
             System.out.println(v2[i]);
