@@ -45,7 +45,6 @@ public class Test {
         for (int i = 0; i < 4; i++) {
             System.out.println(c[i]);
         }
-
         for (int i = 0; i < 4; i++) {
             System.out.println(v2[i]);
         }
