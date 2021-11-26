@@ -90,11 +90,10 @@ public class LinearInterpolation implements InterpolationMethod {
      */
     @Override
     public double evaluate(double z) {
-        /* TODO: diese Methode ist zu implementieren */
         if(z < x[0]){
             return y[0];
         }
-        if(z >= x.length){
+        if(z >= x[x.length - 1]){
             return y[y.length - 1];
         }
 
