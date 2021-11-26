@@ -87,7 +87,17 @@ public class NewtonPolynom implements InterpolationMethod {
      */
     private void computeCoefficients(double[] y) {
         /* TODO: diese Methode ist zu implementieren */
+        int length = y.length;
+        /* inizializiert die Werte der ersten Spalte von dem Dreiecksschema*/
+        for (int i = 0; i < length; i++) {
+            this.f[indexInF(i,0)] = y[i];
+        }
 
+        /* wir fangen an Membervariablen a zu belegen ab dem index 1 */
+        for(int i = 1; i < length; i++) {
+            this.a[i] = (f[indexInF(0, i-1)] - compF(1, i-1)) / (x[0] - x[i]);
+            f[indexInF(0,i)] = a[i];
+        }
     }
 
     /**
@@ -133,9 +143,40 @@ public class NewtonPolynom implements InterpolationMethod {
     public double evaluate(double z) {
         double p = a[x.length];
         for(int i = x.length - 1; i >= 0; i--){
-            p*=z - x[i];
+            p*=(z - x[i]);
             p+=a[i];
         }
         return p;
     }
+
+
+    /**
+     * HILFSFUNKTION!
+     * Diese Funktion gibt den absoluten Offset in dem Array f[], von dem Wert F[Zeile, Spalte]
+     * in dem Dreiecksschema, zurück.
+     * Da die die Werte angefangen von c_i in f[] gespeichert werden, und danach folgen die
+     * Werte der Diagonale, aus denen c_i berechnet werden kann, ist der gesuchte Offset
+     * gleich den Offset von c_(spalte+zeile) + Anzahl an Zeilen
+     */
+    private int indexInF(int zeile, int spalte) {
+        int ret = sum(zeile+spalte) + zeile;
+        return ret + zeile;
+    }
+
+    /**
+     * Gibt die Summe von i=0 bis i=n nach der Formel: n*(n+1)/2
+     * diese Funktion wird verwendet in der Berechnung des Offsets von einem Koeffizient c_n
+     */
+    private int sum(int n) {return ((n * (n+1)) / 2);}
+
+
+    private double compF (int zeile, int spalte) {
+        int offset = indexInF(zeile, spalte);
+        if (spalte == 0) return f[offset]; //base of recursion
+
+        f[offset] = (f[indexInF(zeile, spalte-1)] - compF(zeile+1, spalte-1)) /
+                (x[zeile] - x[spalte+zeile]);
+        return f[offset];
+    }
 }
+
