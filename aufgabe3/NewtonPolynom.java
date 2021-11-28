@@ -86,8 +86,10 @@ public class NewtonPolynom implements InterpolationMethod {
      * Es gilt immer: x und y sind gleich lang.
      */
     private void computeCoefficients(double[] y) {
-        /* TODO: diese Methode ist zu implementieren */
         int length = y.length;
+        /* TODO: diese Methode ist zu implementieren */
+        this.f = new double[sum(length)+length];
+        this.a = new double[length];
         /* inizializiert die Werte der ersten Spalte von dem Dreiecksschema*/
         for (int i = 0; i < length; i++) {
             this.f[indexInF(i,0)] = y[i];
@@ -141,7 +143,7 @@ public class NewtonPolynom implements InterpolationMethod {
      */
     @Override
     public double evaluate(double z) {
-        double p = a[x.length];
+        double p = a[x.length-1];
         for(int i = x.length - 1; i >= 0; i--){
             p*=(z - x[i]);
             p+=a[i];
