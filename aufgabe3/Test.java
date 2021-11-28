@@ -10,17 +10,21 @@ public class Test {
      */
     public static void main(String[] args) {
         testNewton();
-        testSplines();
-        testFFT();
+        //testSplines();
+        //testFFT();
     }
 
     private static void testNewton() {
 
-        double[] x = { -1, 1, 3 };
-        double[] y = { -3, 1, -3 };
+        double[] x = {-2.0, -1.0, 0.0, 1.0, 2.0};
+        double[] y = {1.0, 0.0, 3.0, -2.0, 0.0};
         NewtonPolynom p = new NewtonPolynom(x, y);
-
-        System.out.println(p.evaluate(0) + " sollte sein: 0.0");
+        //System.out.println("x[] is " + Arrays.toString(p.x) + ", sollte sein: [1, 3]");
+        //System.out.println("a[] is " + Arrays.toString(p.getCoefficients()) + ", sollte sein: [2, -3.5]");
+        double sol[] = {1.0, -1.0, 0.0, 2.0, 3.0, 3.0, -2.0, -4.0, -5.0, -2.0, 1.125, 2.5, 3.5, 2.0, 0.0};
+        System.out.println("f[] is " + Arrays.toString(p.f) + ", sollte sein: \n\t   " +
+                Arrays.toString(sol) + " [" + (Arrays.equals(p.f, sol)) + "]");
+//        System.out.println(p.evaluate(0) + " sollte sein: 0.0");
         System.out.println("-------------------------------");
     }
 
