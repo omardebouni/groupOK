@@ -15,6 +15,17 @@ public class IFFT {
      * Zweierpotenz ist. Es gilt also: c.length == 2^m fuer ein beliebiges m.
      */
     public static Complex[] ifft(Complex[] c) {
+        if(c == null){
+            System.out.println("c was null in ifft");
+            return null;
+        }
+        for(int i = 0; i < c.length; i++){
+            if(c[i] == null){
+                System.out.println("c[" + i + "] was null in ifft");
+                return null;
+            }
+        }
+
         int length = c.length;
         if (length == 1) return c;
         Complex v[] = new Complex[length];

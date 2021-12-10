@@ -35,6 +35,11 @@ public class Complex {
      */
     public Complex add(Complex other) {
         // TODO: diese Methode ist zu implementieren
+        if(other == null){
+            System.out.println("other was null in add");
+            return null;
+        }
+
         Complex ret = new Complex(this.real + other.getReal(), this.imaginary + other.getImaginaer());
         return ret;
     }
@@ -46,6 +51,11 @@ public class Complex {
      */
     public Complex sub(Complex other) {
         // TODO: diese Methode ist zu implementieren
+        if(other == null){
+            System.out.println("other was null in sub");
+            return null;
+        }
+
         Complex ret = new Complex(this.real - other.getReal(), this.imaginary - other.getImaginaer());
         return ret;
     }
@@ -56,6 +66,10 @@ public class Complex {
      * @return "this * other"
      */
     public Complex mul(Complex other) {
+        if(other == null){
+            System.out.println("other was null in mul");
+            return null;
+        }
         /* (a + bi) * (c + di) = (ac - bd) + (ad+bc)i */
         Complex ret = new Complex(this.real*other.getReal() - this.imaginary*other.getImaginaer(), this.real* other.getImaginaer()+this.imaginary*other.getReal());
         return ret;

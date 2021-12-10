@@ -85,6 +85,11 @@ public class NewtonPolynom implements InterpolationMethod {
      * Es gilt immer: x und y sind gleich lang.
      */
     private void computeCoefficients(double[] y) {
+        if(y == null){
+            System.out.println("y was null in compute coefficients");
+            return;
+        }
+
         int length = y.length;
         /* initialisieren */
         this.f = new double[sum(length)];

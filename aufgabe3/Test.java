@@ -1,60 +1,146 @@
-import java.util.Arrays;
-import dft.DFT;
-import dft.IFFT;
-import dft.Complex;
-
 public class Test {
 
-    /**
-     * @param args
+    /*************************************************************/
+    /* WICHTIG: Das bestehen dieser Tests sagt nahezu gar nichts */
+    /* ueber das korrekte Funktionieren ihres Programms */
+    /* aus. Es dient einzig und allein als Rahmen zur */
+    /* leichteren Implementierung eigener Tests! */
+
+    /*
+     * Nach Durchfuehrung der Tests startet der Crawler mit GUI. Mit ihm koennen
+     * neue LinkMatrizen erstellt werden.
      */
-    public static void main(String[] args) {
-        testNewton();
-        //testSplines();
-        //testFFT();
-    }
+    /*************************************************************/
+    public static void main(String[] args) throws Exception {
 
-    private static void testNewton() {
-
-        double[] x = {-2.0, -1.0, 0.0, 1.0, 2.0};
-        double[] y = {1.0, 0.0, 3.0, -2.0, 0.0};
-        NewtonPolynom p = new NewtonPolynom(x, y);
-        //System.out.println("x[] is " + Arrays.toString(p.x) + ", sollte sein: [1, 3]");
-        //System.out.println("a[] is " + Arrays.toString(p.getCoefficients()) + ", sollte sein: [2, -3.5]");
-        double sol[] = {1.0, -1.0, 0.0, 2.0, 3.0, 3.0, -2.0, -4.0, -5.0, -2.0, 1.125, 2.5, 3.5, 2.0, 0.0};
-        System.out.println("f[] is " + Arrays.toString(p.f) + ", sollte sein: \n\t   " +
-                Arrays.toString(sol) + " [" + (Arrays.equals(p.f, sol)) + "]");
-//        System.out.println(p.evaluate(0) + " sollte sein: 0.0");
-        System.out.println("-------------------------------");
-    }
-
-    public static void testSplines() {
-        CubicSpline spl = new CubicSpline();
-        double[] y = { 2, 0, 2, 3 };
-        spl.init(-1, 2, 3, y);
-        spl.setBoundaryConditions(9, 0);
-        System.out.println(Arrays.toString(spl.getDerivatives())
-                + " sollte sein: [9.0, -3.0, 3.0, 0.0].");
-    }
-
-    public static void testFFT() {
-        System.out.println("Teste Fast Fourier Transformation");
-
-        double[] v = new double[4];
-        for (int i = 0; i < 4; i++)
-            v[i] = i + 1;
-        Complex[] c = dft.DFT.dft(v);
-        Complex[] v2 = dft.IFFT.ifft(c);
-
-        for (int i = 0; i < 4; i++) {
-            System.out.println(c[i]);
-        }
-        for (int i = 0; i < 4; i++) {
-            System.out.println(v2[i]);
-        }
         System.out
-                .println("Richtig waeren gerundet: Eigene Beispiele ueberlegen");
+                .println("WICHTIG: Das bestehen dieser Tests sagt nahezu gar nichts "
+                        + "ueber das korrekte Funktionieren ihres Programms aus.\n"
+                        + "Es dient einzig und allein als Rahmen zurleichteren Implementierung eigener Tests!");
 
-        System.out.println("*************************************\n");
+        boolean test_gauss = true;
+        boolean test_pagerank = true;
+        boolean test_crawler = true;
+
+        double b[] = { 1, 1 };
+        double C[][] = { { 1, 0 }, { 0, 1 } };
+        double A[][] = { { 1, 1 }, { 1, 1 } };
+        double xC[] = { 1, 1 };
+        double xA[] = { 1, -1 };
+        double x[];
+
+        /******************************/
+        /* Test der Klasse Gauss */
+        /******************************/
+        if (test_gauss) {
+            System.out.println("-----------------------------------------");
+            System.out
+                    .println("primitiver und unvollstaendiger Test der Klasse Gauss");
+
+            System.out
+                    .println("  primitiver und unvollstaendiger Test der Methode backSubst");
+            x = Gauss.backSubst(C, b);
+            if (Util.vectorCompare(x, xC)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else {
+                System.out.println("    FEHLER: falsches Ergebnis:");
+                Util.printVector(x);
+                System.out.println("            richtiges Ergebnis:");
+                Util.printVector(xC);
+            }
+
+            System.out
+                    .println("  primitiver und unvollstaendiger Test der Methode solve");
+            x = Gauss.solve(C, b);
+            if (Util.vectorCompare(x, xC)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else {
+                System.out.println("    FEHLER: falsches Ergebnis:");
+                Util.printVector(x);
+                System.out.println("            richtiges Ergebnis:");
+                Util.printVector(xC);
+            }
+
+            double[][] D = {{7.0, 3.0, -5.0}, {-1.0, -2.0, 4.0}, {-4.0, 1.0, -3.0}};
+            double[] Db = {-12.0, 5.0, 1.0};
+            double[] Dx = {-1, 0, 1};
+            x = Gauss.solve(D, Db);
+            if (Util.vectorCompare(x, Dx)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else {
+                System.out.println("    FEHLER: falsches Ergebnis:");
+                Util.printVector(x);
+                System.out.println("            richtiges Ergebnis:");
+                Util.printVector(Dx);
+            }
+
+            System.out
+                    .println("  primitiver und unvollstaendiger Test der Methode solveSing");
+            x = Gauss.solveSing(A);
+            double lambda = xA[0] / x[0];
+            for (int i = 0; i < x.length; i++) {
+                x[i] *= lambda;
+            }
+            if (Util.vectorCompare(x, xA)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else {
+                System.out.println("    FEHLER: falsches Ergebnis:");
+                Util.printVector(x);
+                System.out.println("            richtiges Ergebnis:");
+                Util.printVector(xA);
+            }
+        }
+
+        /******************************/
+        /* Test der Klasse PageRank */
+        /******************************/
+        if (test_pagerank) {
+            System.out.println("-----------------------------------------");
+            System.out
+                    .println("primitiver und unvollstaendiger Test der Klasse PageRank");
+
+            LinkMatrix lm = new LinkMatrix();
+            /*
+             * Es koennte sein, dass in Eclipse die Datei nicht gefunden wird.
+             * Sie muessen entweder den gesamten absoluten Pfad angeben oder die
+             * Umgebung entsprechend einrichten.
+             */
+            lm.read("irgendwo.txt");
+
+            System.out
+                    .println("  primitiver und unvollstaendiger Test der Methode buildMatrix");
+
+            A = PageRank.buildProbabilityMatrix(lm.L, 0.15);
+            double A0[][] = { { 0.5, 0.5 }, { 0.5, 0.5 } };
+            if (Util.matrixCompare(A, A0)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else {
+                System.out.println("    FEHLER: falsches Ergebnis:");
+                Util.printMatrix(A);
+                System.out.println("            richtiges Ergebnis:");
+                Util.printMatrix(A0);
+            }
+
+            System.out
+                    .println("  primitiver und unvollstaendiger Test der Methode rank");
+            String r[] = PageRank.getSortedURLs(lm.urls, lm.L, 0.15);
+
+            String r0[] = { "http://www.irgendwo.de", "http://www.nirgendwo.de" };
+            String r1[] = { "http://www.nirgendwo.de", "http://www.irgendwo.de" };
+            if (Util.rankingCompare(r, r0)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else if (Util.rankingCompare(r, r1)) {
+                System.out.println("    Richtiges Ergebnis");
+            } else {
+                System.out.println("    FEHLER: falsches Ergebnis:");
+                Util.printStringArray(r);
+                System.out.println("            richtiges Ergebnis:");
+                Util.printStringArray(r0);
+            }
+        }
+
+        if (test_crawler) {
+            (new GUI()).setVisible(true);
+        }
     }
 }
