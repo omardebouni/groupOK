@@ -41,7 +41,10 @@ public class PageRank {
      */
     public static double[] rank(int[][] L, double rho) {
         //TODO: Diese Methode ist zu implementieren
-        return new double[2];
+        double probMatrix[][] = buildProbabilityMatrix(L, rho);
+        double eigenVec[] = Gauss.solveSing(probMatrix);
+        double sum = Arrays.stream(eigenVec).sum();
+        return Arrays.stream(eigenVec).map(x -> x/sum).toArray();
     }
 
     /**
