@@ -5,53 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="039e66ce-e083-419e-ae3b-24ece9f10005" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CubicSpline.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageViewer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterpolationMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterpolationsPlotter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinearInterpolation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NearestNeighbour.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewtonPolynom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Picture.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_Interpolation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TridiagonalMatrix.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bilder/3x4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bilder/numpro.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bilder/photocredit.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bilder/test.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dft/Complex.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dft/DFT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dft/IFFT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/CubicSpline.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/Function.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/ImageViewer$PictureFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/ImageViewer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/InterpolationMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/InterpolationsPlotter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/LinearInterpolation$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/LinearInterpolation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/NearestNeighbour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/NewtonPolynom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/Picture.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/PlotComponent$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/PlotComponent$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/PlotComponent$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/PlotComponent$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/PlotComponent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/aufgabe3/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/Test_Interpolation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/TridiagonalMatrix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/ViewComponent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/bilder/3x4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/bilder/numpro.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/bilder/photocredit.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/bilder/test.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/dft/Complex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/dft/DFT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/aufgabe3/dft/IFFT.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageRank.java" beforeDir="false" afterPath="$PROJECT_DIR$/PageRank.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +72,8 @@
       <updated>1638876322768</updated>
       <workItem from="1638876324501" duration="57000" />
       <workItem from="1638876395915" duration="16769000" />
+      <workItem from="1639564426435" duration="30000" />
+      <workItem from="1639566003855" duration="719000" />
     </task>
     <servers />
   </component>
