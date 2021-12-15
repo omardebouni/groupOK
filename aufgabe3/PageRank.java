@@ -8,11 +8,25 @@ public class PageRank {
      * PARAMETER:
      * L: die Linkmatrix (s. Aufgabenblatt)
      * rho: Wahrscheinlichkeit, anstatt einem Link zu folgen,
-     *      zufaellig irgendeine Seite zu besuchen
+     * zufaellig irgendeine Seite zu besuchen
      */
     public static double[][] buildProbabilityMatrix(int[][] L, double rho) {
         //TODO: Diese Methode ist zu implementieren
-        return new double[2][2];
+        int size = L.length;
+        // eine zweidimensionale Matrix mit der passenden Größe erstellen
+        double probMatrix[][] = new double[size][size];
+        // durch die Einträge iterieren und die Wahrscheinlichkeit mithilfe der Spaltensummen berechnen
+        for (int j = 0; j < size; j++) {
+            // Spalten iterieren
+            int sum = sumSpalte(L, j);
+            for (int i = 0; i < size; i++) {
+                // Zeilen iterieren
+                if (L[i][j] == 1) {
+                    probMatrix[i][j] = (1.0 / sum) * (1-rho) + rho / size;
+                } else probMatrix[i][j] = rho / size;
+            }
+        }
+        return probMatrix;
     }
 
     /**
@@ -24,7 +38,6 @@ public class PageRank {
      * L: die Linkmatrix (s. Aufgabenblatt)
      * rho: Wahrscheinlichkeit, zufaellig irgendeine Seite zu besuchen
      * ,anstatt einem Link zu folgen.
-     *
      */
     public static double[] rank(int[][] L, double rho) {
         //TODO: Diese Methode ist zu implementieren
@@ -41,7 +54,7 @@ public class PageRank {
      * urls: Die URLs der betrachteten Seiten
      * L: die Linkmatrix (s. Aufgabenblatt)
      * rho: Wahrscheinlichkeit, anstatt einem Link zu folgen,
-     *      zufaellig irgendeine Seite zu besuchen
+     * zufaellig irgendeine Seite zu besuchen
      */
     public static String[] getSortedURLs(String[] urls, int[][] L, double rho) {
         int n = L.length;
@@ -81,5 +94,18 @@ public class PageRank {
             url = u;
             pr = p;
         }
+    }
+
+    /**
+     * HILFSFUNKTION
+     * Berechnet die Summe der j-ten Spalte in einem zweidimensionalen Array
+     */
+
+    private static int sumSpalte(int L[][], int j) {
+        int sum = 0;
+        for (int i = 0; i < L.length; i++) {
+            sum += L[i][j];
+        }
+        return sum;
     }
 }

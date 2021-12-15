@@ -18,7 +18,7 @@ public class Test {
                         + "ueber das korrekte Funktionieren ihres Programms aus.\n"
                         + "Es dient einzig und allein als Rahmen zurleichteren Implementierung eigener Tests!");
 
-        boolean test_gauss = true;
+        boolean test_gauss = false;
         boolean test_pagerank = true;
         boolean test_crawler = true;
 
@@ -105,7 +105,7 @@ public class Test {
              * Sie muessen entweder den gesamten absoluten Pfad angeben oder die
              * Umgebung entsprechend einrichten.
              */
-            lm.read("irgendwo.txt");
+            lm.read("/Users/omardebouni/groupOK/aufgabe3/webseiten/irgendwo.txt");
 
             System.out
                     .println("  primitiver und unvollstaendiger Test der Methode buildMatrix");
