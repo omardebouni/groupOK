@@ -30,7 +30,7 @@ public class Gauss {
 
     private static int findmax(double[][] a, int column){
         double max = 0;
-        int max_row = 0;
+        int max_row = column;
 
         for(int i = column; i < a[0].length; i++){
             if(Math.abs(a[i][column]) > max){
@@ -114,7 +114,57 @@ public class Gauss {
      * A: Eine singulaere Matrix der Groesse n x n
      */
     public static double[] solveSing(double[][] A) {
-       return null;
+        int n = A.length - 1;
+        double[][] a = new double[n+1][n+1];
+        int stop = -1;
+
+        for(int i = 0; i < A.length; i++){
+            System.arraycopy(A[i], 0, a[i], 0, A[i].length);
+        }
+
+        for(int j = 0; j < n; j++){
+
+            int max_row = findmax(a, j);
+            if(j != max_row){
+                double[] temp = new double[n+1];
+                for(int i = 0; i < n + 1; i++){
+                    temp[i] = a[j][i];
+                    a[j][i] = a[max_row][i];
+                    a[max_row][i] = temp[i];
+                }
+            }
+
+            double akk = a[j][j];
+            if(akk == 0){
+                stop = j;
+                break;
+            }
+
+            double[] k = new double[n+1];
+            System.arraycopy(a[j], 0, k, 0, n + 1);
+
+            for(int i = j + 1; i < n + 1; i++){
+                double aik = a[i][j];
+                for(int l = j; l < n + 1; l++){
+                    a[i][l] -= k[l]*aik/akk;
+                }
+            }
+        }
+
+        if(stop == -1 && a[n][n] == 0){
+            stop = n;
+        }
+
+        double[] v = new double[stop];
+        for(int i = 0;  i < stop; i++){
+            v[i] = -1 * a[i][stop];
+        }
+
+        double[] p = new double[n+1];
+        p[0] = backSubst(a,v)[0];
+        p[1] = 1;
+
+        return p;
     }
 
     /**
