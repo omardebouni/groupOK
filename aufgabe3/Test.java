@@ -91,7 +91,8 @@ public class Test {
             }
 
             double[][] E = {{1.0, 2.0, 0.0}, {-1.0, -2.0, 0.0}, {0.0, 0.0, 0.0}};
-            x = Gauss.solveSing(E);
+            double[][] F = {{0.99999999999, -0.5}, {1.0, -0.5}};
+            x = Gauss.solveSing(F);
 
         }
 

@@ -135,7 +135,7 @@ public class Gauss {
             }
 
             double akk = a[j][j];
-            if(akk == 0){
+            if(Math.abs(akk) < Math.pow(1, -10)){
                 stop = j;
                 break;
             }
@@ -151,7 +151,7 @@ public class Gauss {
             }
         }
 
-        if(stop == -1 && a[n][n] == 0){
+        if(stop == -1 && Math.abs(a[n][n]) < Math.pow(1, -10)){
             stop = n;
         }
 
